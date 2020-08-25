@@ -7,11 +7,11 @@ html
     body
         h1  You are connected
         form(action="/add", method="GET")
-            button(type="submit") Ajouter un vin
+            button(type="submit", class="myButton") Ajouter un vin
         form(action="/logout", method="POST")
-            button(type="submit") se deconnecter
+            button(type="submit", class="myButton") se deconnecter
         form(action="/", method="GET")
-            button(type="submit") Accueil
+            button(type="submit", class="myButton") Accueil
         each item in Vines
             span= item.Name
             li= item.Description
