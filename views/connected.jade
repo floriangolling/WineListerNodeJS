@@ -1,0 +1,12 @@
+doctype html
+html
+    head
+        title Page d'accueil
+        style
+            include style/css/test.css
+    body
+        h1  You are connected
+        form(action="/add", method="GET")
+            button(type="submit") Ajouter un vin
+        form(action="/logout", method="POST")
+            button(type="submit") se deconnecter

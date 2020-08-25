@@ -1,0 +1,12 @@
+doctype html
+html
+    head
+        title Page d'accueil
+        style
+            include style/css/test.css
+    body
+        h1  Bienvenue dans la page d'accueil
+        form(action="/register",method="GET" )
+            button(type="submit") S'enregistrer
+        form(action="/login",method="GET" )
+            button(type="submit") Se connecter

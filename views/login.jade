@@ -1,0 +1,16 @@
+doctype html
+html
+    head
+        title Login
+    body
+        p bienvenue sur la page de login
+        form(action="/login",method="POST" )
+            input(type="text",value="",name="prenom" )
+            span user
+            p
+            input(type="password", value="",name="password")
+            span password
+            p
+            button(type="submit") se connecter
+        form(action="/", method="GET")
+            button(type="submit") Accueil
