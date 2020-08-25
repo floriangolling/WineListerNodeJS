@@ -132,7 +132,7 @@ app.get('/add', (req, res, next) => {
     console.log('GET ADD');
     console.log(sess);
     if (!sess)
-        res.redirect('accueil');
+        res.redirect('/');
     else {
         res.render('add');
     }
