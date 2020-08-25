@@ -26,7 +26,6 @@ let sess;
 // VARIABLE GLOBALE DE SESSION
 
 const Model = Sequelize.Model;
-
 class User extends Model {}
 User.init({
   firstName: {
@@ -99,6 +98,20 @@ app.get('/', (req, res, next) => {
         res.render('connected');
 });
 
+app.get('/vins', async function(req, res) {
+    console.log('VINE GET');
+    if (!sess)
+        res.redirect('/');
+    else {
+        const vine = await Vine.findAll({ where: { username: sess.user }});
+        if (vine == null)
+            res.redirect('/add');
+        else {
+            console.log('les vins sont bien trouvés');
+            res.render('vins', {Vines: vine});
+        }
+    }
+});
 
 //PERMET D'AJOUTER UN VIN SI T'ES CONNECTE
 

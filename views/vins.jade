@@ -10,5 +10,8 @@ html
             button(type="submit") Ajouter un vin
         form(action="/logout", method="POST")
             button(type="submit") se deconnecter
-        form(action="/vins", method="get")
-            button(type="submit") voir tout les vins
+        each item in Vines
+            span= item.Name
+            li= item.Description
+            li= item.Quantity
+            p
