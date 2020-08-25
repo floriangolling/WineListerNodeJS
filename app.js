@@ -21,6 +21,10 @@ let session = require('express-session');
 
 // CREATION D'UN SCHEMA DE TABLE SELON LE MODEL (déjà des valeurs par default genre date id etc...)
 
+let sess;
+
+// VARIABLE GLOBALE DE SESSION
+
 const Model = Sequelize.Model;
 
 class User extends Model {}
@@ -60,10 +64,6 @@ Vine.init({
 });
 
 // CREATION DE LA TABLE DANS LA DB
-
-let sess;
-
-// VARIABLE GLOBALE DE SESSION
 
 app.use(session({secret: 'ssshhhhh',
                 resave: true,
