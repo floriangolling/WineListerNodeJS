@@ -1,8 +1,9 @@
 const express = require('express');
 const { request, Router } = require('express');
 const app = express();
-const port = process.env.PORT
+const port = 8080
 
+//process.env.PORT
 // CONFIGURATION DE SEQUELIZE LE LANGAGE UTILISE + SON REPERTOIRE
 
 const Sequelize = require('sequelize');
