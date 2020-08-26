@@ -247,7 +247,7 @@ app.use("/", express.static(__dirname));
 
 app.use(function(req, res){
     res.status(404).send('Page introuvable !');
-});.
+});
 
 app.listen(port, () => {
     console.log(`App running on : http://localhost:${port}`);
