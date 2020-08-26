@@ -18,6 +18,7 @@ const { updateLanguageServiceSourceFile } = require('typescript');
 let jsonParser = bodyParser.json();
 let urlencodedParser = bodyParser.urlencoded({ extended: false });
 let session = require('express-session');
+let cookieParser = require('cookie-parser');
 
 // CREATION D'UN SCHEMA DE TABLE SELON LE MODEL (déjà des valeurs par default genre date id etc...)
 
@@ -63,7 +64,7 @@ Vine.init({
 });
 
 // CREATION DE LA TABLE DANS LA DB
-
+app.use(cookieParser())
 app.use(session({secret: 'ssshhhhh',
                 resave: true,
                 saveUninitialized: true
