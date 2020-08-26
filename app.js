@@ -1,7 +1,7 @@
 const express = require('express');
 const { request, Router } = require('express');
 const app = express();
-const port = process.env.PORT
+const port = 8080
 
 // CONFIGURATION DE SEQUELIZE LE LANGAGE UTILISE + SON REPERTOIRE
 
@@ -21,10 +21,6 @@ let session = require('express-session');
 let cookieParser = require('cookie-parser');
 
 // CREATION D'UN SCHEMA DE TABLE SELON LE MODEL (déjà des valeurs par default genre date id etc...)
-
-let sess;
-
-// VARIABLE GLOBALE DE SESSION
 
 const Model = Sequelize.Model;
 class User extends Model {}
@@ -92,8 +88,7 @@ Vine.sync({ force: false });
 
 app.get('/', (req, res, next) => {
     console.log('GET ACCUEIL');
-    console.log(sess);
-    if (!sess)
+    if (!req.session.email)
         res.render('accueil');
     else
         res.render('connected');
@@ -101,10 +96,10 @@ app.get('/', (req, res, next) => {
 
 app.get('/vins', async function(req, res) {
     console.log('VINE GET');
-    if (!sess)
+    if (!req.session.email)
         res.redirect('/');
     else {
-        const vine = await Vine.findAll({ where: { username: sess.user }});
+        const vine = await Vine.findAll({ where: { username: req.session.email }});
         if (vine == null)
             res.redirect('/add');
         else {
@@ -119,12 +114,11 @@ app.get('/vins', async function(req, res) {
 app.post('/add', async function(req, res) {
     console.log('ADD');
     console.log(req.body);
-    if (!sess)
+    if (!req.session.email)
         res.redirect('/');
     else {
-        await Vine.create({ username: sess.user, Quantity: req.body.quantity, Description: req.body.description, Name: req.body.name });
+        await Vine.create({ username: req.session.email, Quantity: req.body.quantity, Description: req.body.description, Name: req.body.name });
         console.log('vin bien rajouté');
-        console.log('username =' + sess.user);
         res.redirect('/vins');
     }
 });
@@ -133,18 +127,17 @@ app.post('/add', async function(req, res) {
 app.post('/minus', async function(req, res) {
     console.log('MINUS');
     console.log(req.body);
-    if (!sess)
+    if (!req.session.email)
         res.redirect('/');
     else {
-        const thisone = await Vine.findOne({ where: { username: sess.user, id: req.body.minus }} )
+        const thisone = await Vine.findOne({ where: { username: req.session.email, id: req.body.minus }} )
         console.log(thisone);
         let quan = thisone.Quantity - 1;
         if (quan < 0)
             quan = 0;
         console.log('NEW QUANTITY =' + quan)
-        await Vine.update({ Quantity: quan }, {where:{ id: req.body.minus, username: sess.user }})
+        await Vine.update({ Quantity: quan }, {where:{ id: req.body.minus, username: req.session.email }})
         console.log('vin bien réduit');
-        console.log('username =' + sess.user);
         res.redirect('/vins');
     }
 });
@@ -154,24 +147,23 @@ app.post('/minus', async function(req, res) {
 app.post('/plus', async function(req, res) {
     console.log('PLUS');
     console.log(req.body);
-    if (!sess)
+    if (!req.session.email)
         res.redirect('/');
     else {
-        const thisone = await Vine.findOne({ where: { username: sess.user, id: req.body.plus }} )
+        const thisone = await Vine.findOne({ where: { username: req.session.email, id: req.body.plus }} )
         console.log(thisone);
         let quan = thisone.Quantity + 1;
         console.log('NEW QUANTITY =' + quan)
-        await Vine.update({ Quantity: quan }, {where:{ id: req.body.plus, username: sess.user }})
+        await Vine.update({ Quantity: quan }, {where:{ id: req.body.plus, username: req.session.email }})
         console.log('vin bien ajouté');
-        console.log('username =' + sess.user);
+        console.log('username =' + req.session.user.firstName);
         res.redirect('/vins');
     }
 });
 
 app.get('/add', (req, res, next) => {
     console.log('GET ADD');
-    console.log(sess);
-    if (!sess)
+    if (!req.session.email)
         res.redirect('/');
     else {
         res.render('add');
@@ -184,7 +176,6 @@ app.post('/logout', function(req, res) {
     console.log('POST LOGOUT');
     console.log('loggin out');
     req.session.destroy();
-    sess = req.session;
     res.redirect('/');
 });
 
@@ -208,9 +199,8 @@ app.post('/login', async function(req, res) {
     if (username != null) {
         if (username.password == req.body.password) {
             console.log('correct password i let you in :)');
-            sess = req.session;
-            sess.user = req.body.prenom;
-            console.log(sess);
+            req.session.email = req.body.prenom;
+            req.session.password = req.body.password;
             res.redirect('/');
         } else {
             console.log('invalid password');
