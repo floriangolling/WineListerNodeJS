@@ -2,28 +2,29 @@ const express = require('express');
 const { request, Router } = require('express');
 const app = express();
 const port = process.env.PORT
-
-//process.env.PORT
-// CONFIGURATION DE SEQUELIZE LE LANGAGE UTILISE + SON REPERTOIRE
-
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: './database.sqlite'
-});
-
-// Pour récuperer les infos des forms et les parser (urlencoded pour moi)
-
 let bodyParser = require('body-parser');
 const { updateLanguageServiceSourceFile } = require('typescript');
 let jsonParser = bodyParser.json();
 let urlencodedParser = bodyParser.urlencoded({ extended: false });
 let session = require('express-session');
 let cookieParser = require('cookie-parser');
-
-// CREATION D'UN SCHEMA DE TABLE SELON LE MODEL (déjà des valeurs par default genre date id etc...)
-
 const Model = Sequelize.Model;
+const sequelize = new Sequelize({
+    dialect: 'sqlite',
+    storage: './database.sqlite'
+});
+
+/*      //VARIABLE GLOBALE                                                                                                              ///////////////////////////////////////////////////////
+        PORT: utilisation sur le site de déploiement "process.env.PORT" et en local 8080;
+        BOYPARSER: Le bodyparser permet le parsing des forms en urlencoded dans ce cas afin de les recup et les lire;
+        SESSION: permet les sessions, permet des connexions simultanées au site, avec email + password qui s'enregistre "dynamiquement";
+        SEQUELIZE: permet de faire des modeles de DB, et c'est ce qui permet aussi les query etc..;
+        APP/EXPRESS: permet de faire les différentes routes, avec des methodes différentes;
+        DIALECT/STORAGE: Permet d'identifier le langage utilié + donne un dossier ou il peut créer la DB locale, tout est automatique;
+        //VARIABLE GLOBALE                                                                                                              ///////////////////////////////////////////////////////
+*/
+
 class User extends Model {}
 User.init({
   firstName: {
@@ -60,17 +61,25 @@ Vine.init({
     modelName: 'vine'
 });
 
-// CREATION DE LA TABLE DANS LA DB
+/*      //MODEL TABLE                                                                                                              ///////////////////////////////////////////////////////
+        La création de tout les models nécessaires dans la DB, en gros le schéma des tables, ici deux tables;
+        Déjà des valeurs de base comme ID, et les timestamps;
+        VINE: nom du vin, description et quantité;
+        User: password, username;
+*/      //MODEL TABLE                                                                                                              ///////////////////////////////////////////////////////
+
 app.use(cookieParser())
 app.use(session({secret: 'ssshhhhh',
                 resave: false,
-                saveUninitialized: false
-}));
-
+                saveUninitialized: false }));
 app.use(urlencodedParser);
 app.set("view engine", "jade");
 
-//Permet de parser tout automatique + utiliser jade.
+/*      //APPUSE                                                                                                                     ///////////////////////////////////////////////////////
+        CookieParser et session permet la session différent chez chaque personne, encore un peu flou mais ça marche;
+        urlencodedParser: permet de récuperer les infos des forms et les parser;
+        viewengine: explique que j'utiliserai jade et pas du html pur.
+*/      //APPUSE                                                                                                                     ///////////////////////////////////////////////////////
 
 sequelize
   .authenticate()
@@ -84,8 +93,10 @@ sequelize
 User.sync({ force: false });
 Vine.sync({ force: false });
 
-//Se connecte a la DB , le force permet d'ecraser la table si elle existe déjà.
-//Les différentes routes de l'app, app.get pour les gets, sinon post, et pour tout app.all.
+/*      //SEQUELIZE                                                                                                                     ///////////////////////////////////////////////////////
+        SEQUELIZE: permet de se connecter a la DB, renvoie une erreur si ce n'est pas possible.
+        SYNC: Permet de se synchroniser a la DB locale, false permet de récuperer celle déjà existante, sinon true permet d'écraser une déjà existante
+*/      //SEQUELIZE                                                                                                                    ///////////////////////////////////////////////////////
 
 app.get('/', (req, res, next) => {
     console.log('GET ACCUEIL');
@@ -244,6 +255,8 @@ app.post('/register', async function(req, res) {
 });
 
 //utilisé si aucune route prévue est demandé, retour d'erreur.
+
+app.use("/", express.static(__dirname));
 
 app.use(function(req, res){
     res.status(404).send('Page introuvable !');
