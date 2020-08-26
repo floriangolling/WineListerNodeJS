@@ -142,6 +142,20 @@ app.post('/minus', async function(req, res) {
     }
 });
 
+//SUPPRESSION BOUTON
+
+app.post('/rm', async function(req, res) {
+    console.log('RM');
+    console.log(req.body);
+    if (!req.session.email)
+        res.redirect('/');
+    else {
+        await Vine.destroy({ where: { username: req.session.email, id: req.body.minus }} )
+        console.log('vin bien supprimé');
+        res.redirect('/vins');
+    }
+});
+
 //PLUS BUTTON
 
 app.post('/plus', async function(req, res) {
