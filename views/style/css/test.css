@@ -17,9 +17,10 @@ body {
     font-family:Arial;
     font-size:14px;
     font-weight:bold;
-    padding:12px 16px;
+    padding:8px 0px;
     text-decoration:none;
     text-shadow:0px 1px 0px #ffffff;
+    width: 7%;
   }
   .myButton:hover {
     background:linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
@@ -29,4 +30,32 @@ body {
     position:relative;
     top:1px;
   }
+
+  input,
+  .btn {
+    width: 15%;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    margin: 0px 45%;
+    opacity: 0.85;
+    display: inline-block;
+    font-size: 17px;
+    line-height: 20px;
+    text-decoration: none;
+  }
   
+  input:hover,
+  .btn:hover {
+    opacity: 1;
+  }
+
+  .myTitle {
+    margin-top: 15%;
+    font-size: 30px;
+    margin-left: 50%;
+  }
+
+  .myBox {
+    border-radius: 4px;
+  }

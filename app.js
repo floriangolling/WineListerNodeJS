@@ -124,7 +124,7 @@ app.post('/add', async function(req, res) {
         await Vine.create({ username: sess.user, Quantity: req.body.quantity, Description: req.body.description, Name: req.body.name });
         console.log('vin bien rajouté');
         console.log('username =' + sess.user);
-        res.redirect('/add');
+        res.redirect('/vins');
     }
 });
 

@@ -12,8 +12,9 @@ html
             button(type="submit", class="myButton") se deconnecter
         form(action="/", method="GET")
             button(type="submit", class="myButton") Accueil
-        each item in Vines
-            span= item.Name
-            li= item.Description
-            li= item.Quantity
-            p
+        div(class="item")
+            each item in Vines
+                span= item.Name
+                li= item.Description
+                li= item.Quantity
+                p

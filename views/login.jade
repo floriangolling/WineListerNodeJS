@@ -1,16 +1,16 @@
 doctype html
 html
     head
-        title Login
+        title LOGIN
+        style
+            include style/css/test.css
     body
-        p bienvenue sur la page de login
-        form(action="/login",method="POST" )
-            input(type="text",value="",name="prenom" )
-            span user
-            p
-            input(type="password", value="",name="password")
-            span password
-            p
-            button(type="submit", class="myButton") se connecter
         form(action="/", method="GET")
             button(type="submit", class="myButton") Accueil
+        form(action="/login",method="POST" )
+            p(class="myTitle") LOGIN
+            input(type="text",value="",name="prenom",placeholder="user" required)
+            p
+            input(type="password", value="",name="password",placeholder="password" required)
+            p
+            button(type="submit", class="myButton" style="margin-left:45%") se connecter
