@@ -1,3 +1,6 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                /* WINE LISTER 2020 GOLLING FLORIAN EPITECH STAGE */
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const express = require('express');
 const { request, Router } = require('express');
 const app = express();
@@ -15,14 +18,14 @@ const sequelize = new Sequelize({
     storage: './database.sqlite'
 });
 
-/*      //VARIABLE GLOBALE                                                                                                              ///////////////////////////////////////////////////////
+/*      //VARIABLE GLOBALE                                                                                                              ////////////////////////////////////////////////////////////////////
         PORT: utilisation sur le site de déploiement "process.env.PORT" et en local 8080;
         BOYPARSER: Le bodyparser permet le parsing des forms en urlencoded dans ce cas afin de les recup et les lire;
         SESSION: permet les sessions, permet des connexions simultanées au site, avec email + password qui s'enregistre "dynamiquement";
         SEQUELIZE: permet de faire des modeles de DB, et c'est ce qui permet aussi les query etc..;
         APP/EXPRESS: permet de faire les différentes routes, avec des methodes différentes;
         DIALECT/STORAGE: Permet d'identifier le langage utilié + donne un dossier ou il peut créer la DB locale, tout est automatique;
-        //VARIABLE GLOBALE                                                                                                              ///////////////////////////////////////////////////////
+        //VARIABLE GLOBALE                                                                                                              ////////////////////////////////////////////////////////////////////
 */
 
 class User extends Model {}
@@ -61,12 +64,12 @@ Vine.init({
     modelName: 'vine'
 });
 
-/*      //MODEL TABLE                                                                                                              ///////////////////////////////////////////////////////
+/*      //MODEL TABLE                                                                                                              ////////////////////////////////////////////////////////////////////
         La création de tout les models nécessaires dans la DB, en gros le schéma des tables, ici deux tables;
         Déjà des valeurs de base comme ID, et les timestamps;
         VINE: nom du vin, description et quantité;
         User: password, username;
-*/      //MODEL TABLE                                                                                                              ///////////////////////////////////////////////////////
+*/      //MODEL TABLE                                                                                                              ////////////////////////////////////////////////////////////////////
 
 app.use(cookieParser())
 app.use(session({secret: 'ssshhhhh',
@@ -75,11 +78,11 @@ app.use(session({secret: 'ssshhhhh',
 app.use(urlencodedParser);
 app.set("view engine", "jade");
 
-/*      //APPUSE                                                                                                                     ///////////////////////////////////////////////////////
+/*      //APPUSE                                                                                                                     ////////////////////////////////////////////////////////////////////
         CookieParser et session permet la session différent chez chaque personne, encore un peu flou mais ça marche;
         urlencodedParser: permet de récuperer les infos des forms et les parser;
         viewengine: explique que j'utiliserai jade et pas du html pur.
-*/      //APPUSE                                                                                                                     ///////////////////////////////////////////////////////
+*/      //APPUSE                                                                                                                     ////////////////////////////////////////////////////////////////////
 
 sequelize
   .authenticate()
@@ -93,10 +96,10 @@ sequelize
 User.sync({ force: false });
 Vine.sync({ force: false });
 
-/*      //SEQUELIZE                                                                                                                     ///////////////////////////////////////////////////////
+/*      //SEQUELIZE                                                                                                                     ////////////////////////////////////////////////////////////////////
         SEQUELIZE: permet de se connecter a la DB, renvoie une erreur si ce n'est pas possible.
         SYNC: Permet de se synchroniser a la DB locale, false permet de récuperer celle déjà existante, sinon true permet d'écraser une déjà existante
-*/      //SEQUELIZE                                                                                                                    ///////////////////////////////////////////////////////
+*/      //SEQUELIZE                                                                                                                    ////////////////////////////////////////////////////////////////////
 
 app.get('/', (req, res, next) => {
     console.log('GET ACCUEIL');
@@ -121,8 +124,6 @@ app.get('/vins', async function(req, res) {
     }
 });
 
-//PERMET D'AJOUTER UN VIN SI T'ES CONNECTE
-
 app.post('/add', async function(req, res) {
     console.log('ADD');
     console.log(req.body);
@@ -135,7 +136,6 @@ app.post('/add', async function(req, res) {
     }
 });
 
-//MINUS BUTTON
 app.post('/minus', async function(req, res) {
     console.log('MINUS');
     console.log(req.body);
@@ -154,8 +154,6 @@ app.post('/minus', async function(req, res) {
     }
 });
 
-//SUPPRESSION BOUTON
-
 app.post('/rm', async function(req, res) {
     console.log('RM');
     console.log(req.body);
@@ -167,8 +165,6 @@ app.post('/rm', async function(req, res) {
         res.redirect('/vins');
     }
 });
-
-//PLUS BUTTON
 
 app.post('/plus', async function(req, res) {
     console.log('PLUS');
@@ -196,8 +192,6 @@ app.get('/add', (req, res, next) => {
     }
 });
 
-// DESTROY LA SESSION SI IL APPUIE SUR LOGOUT
-
 app.post('/logout', function(req, res) {
     console.log('POST LOGOUT');
     console.log('loggin out');
@@ -214,9 +208,6 @@ app.get('/login', function(req, res) {
     console.log('GET LOGIN');
     res.render('login');
 });
-
-//PERMET LA CONNECTION FACTICE, CHECK SI LE COMPTE EXISTE, ET SI IL EXISTE IL VERIFIE QUE LE MOT DE PASSE EST BON, REDIRIGE VERS L'ACCUEIL SI TOUT EST BON
-// RAJOUT DE LA SESSION
 
 app.post('/login', async function(req, res) {
     console.log('POST LOGIN');
@@ -238,8 +229,6 @@ app.post('/login', async function(req, res) {
     }
 });
 
-//CHECK SI LE COMPTE EXISTE DEJA ET SINON IL LE CREER DANS LA DATABASE, JE NE VERIFIE PAS ENCORE LES STRINGS ENVOYE ISNON
-
 app.post('/register', async function(req, res) {
     console.log('POST REGISTER');
     console.log(req.body);
@@ -254,16 +243,16 @@ app.post('/register', async function(req, res) {
     }
 });
 
-//utilisé si aucune route prévue est demandé, retour d'erreur.
-
 app.use("/", express.static(__dirname));
 
 app.use(function(req, res){
     res.status(404).send('Page introuvable !');
-});
-
-// Message lancé au démarrage de l'app.
+});.
 
 app.listen(port, () => {
     console.log(`App running on : http://localhost:${port}`);
 });
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 2020 GOLLING FLORIAN WINELISTER
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
