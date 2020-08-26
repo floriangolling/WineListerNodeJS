@@ -66,8 +66,8 @@ Vine.init({
 // CREATION DE LA TABLE DANS LA DB
 app.use(cookieParser())
 app.use(session({secret: 'ssshhhhh',
-                resave: true,
-                saveUninitialized: true
+                resave: false,
+                saveUninitialized: false
 }));
 
 app.use(urlencodedParser);
