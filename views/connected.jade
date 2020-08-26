@@ -6,9 +6,9 @@ html
             include style/css/test.css
     body
         h1  You are connected
-        form(action="/add", method="GET")
+        form(action="/add", method="GET" style="display:inline-block")
             button(type="submit", class="myButton") Ajouter un vin
-        form(action="/logout", method="POST")
+        form(action="/logout", method="POST" style="display:inline-block")
             button(type="submit", class="myButton") se deconnecter
-        form(action="/vins", method="get")
+        form(action="/vins", method="get" style="display:inline-block")
             button(type="submit", class="myButton") voir tout les vins

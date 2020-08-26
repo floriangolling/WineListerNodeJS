@@ -128,6 +128,45 @@ app.post('/add', async function(req, res) {
     }
 });
 
+//MINUS BUTTON
+app.post('/minus', async function(req, res) {
+    console.log('MINUS');
+    console.log(req.body);
+    if (!sess)
+        res.redirect('/');
+    else {
+        const thisone = await Vine.findOne({ where: { username: sess.user, id: req.body.minus }} )
+        console.log(thisone);
+        let quan = thisone.Quantity - 1;
+        if (quan < 0)
+            quan = 0;
+        console.log('NEW QUANTITY =' + quan)
+        await Vine.update({ Quantity: quan }, {where:{ id: req.body.minus, username: sess.user }})
+        console.log('vin bien réduit');
+        console.log('username =' + sess.user);
+        res.redirect('/vins');
+    }
+});
+
+//PLUS BUTTON
+
+app.post('/plus', async function(req, res) {
+    console.log('PLUS');
+    console.log(req.body);
+    if (!sess)
+        res.redirect('/');
+    else {
+        const thisone = await Vine.findOne({ where: { username: sess.user, id: req.body.plus }} )
+        console.log(thisone);
+        let quan = thisone.Quantity + 1;
+        console.log('NEW QUANTITY =' + quan)
+        await Vine.update({ Quantity: quan }, {where:{ id: req.body.plus, username: sess.user }})
+        console.log('vin bien ajouté');
+        console.log('username =' + sess.user);
+        res.redirect('/vins');
+    }
+});
+
 app.get('/add', (req, res, next) => {
     console.log('GET ADD');
     console.log(sess);

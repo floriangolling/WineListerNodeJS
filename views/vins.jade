@@ -6,15 +6,21 @@ html
             include style/css/test.css
     body
         h1  You are connected
-        form(action="/add", method="GET")
+        form(action="/add", method="GET" style="display:inline-block")
             button(type="submit", class="myButton") Ajouter un vin
-        form(action="/logout", method="POST")
+        form(action="/logout", method="POST" style="display:inline-block")
             button(type="submit", class="myButton") se deconnecter
-        form(action="/", method="GET")
+        form(action="/", method="GET" style="display:inline-block")
             button(type="submit", class="myButton") Accueil
-        div(class="item")
-            each item in Vines
-                span= item.Name
-                li= item.Description
-                li= item.Quantity
-                p
+        form(action="/vins", method="POST")
+        each item in Vines
+            div(style="margin-left:2%;margin-top:1%")
+                span(style="font-size:25px")= item.Name
+                li(style="display:block")= item.Description
+                li(style="display:inline-block")= item.Quantity
+                form(action="/plus", method="POST" style="display:inline-block;margin-left:2%")
+                    button(type="submit") +
+                    input(type="hidden", name="plus", value=item.id)
+                form(action="/minus", method="POST" style="display:inline-block")
+                    button(type="submit") -
+                    input(type="hidden", name="minus", value=item.id)

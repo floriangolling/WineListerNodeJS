@@ -17,10 +17,9 @@ body {
     font-family:Arial;
     font-size:14px;
     font-weight:bold;
-    padding:8px 0px;
+    padding:8px 12px;
     text-decoration:none;
     text-shadow:0px 1px 0px #ffffff;
-    width: 7%;
   }
   .myButton:hover {
     background:linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
@@ -44,7 +43,7 @@ body {
     line-height: 20px;
     text-decoration: none;
   }
-  
+
   input:hover,
   .btn:hover {
     opacity: 1;
