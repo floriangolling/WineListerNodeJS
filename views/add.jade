@@ -7,12 +7,12 @@ html
     body
         form(action="/", method="GET")
             button(type="submit", class="myButton") Accueil
-        p(class="myTitle" style="margin-left:46%") Ajout d'un vin
+        p(class="myTitle" class="myBox") Ajout d'un vin
         form(action="/add",method="POST" )
             input(type="text",value="",name="name" placeholder="Nom du vin" required)
             p
             input(type="text", value="",name="description", placeholder="Description du vin" required)
             p
-            input(type="number",value="0",name="quantity", placeholder="Quantité", required)
+            input(type="number",value="0",name="quantity", placeholder="Quantité", min="0" required)
             p
             button(type="submit", class="myButton", style="margin-left:45%") Ajouter le vin

@@ -5,22 +5,29 @@ html
         style
             include style/css/test.css
     body
-        h1  You are connected
+        h1  Rebonjour, vous êtes connectés
         form(action="/add", method="GET" style="display:inline-block")
             button(type="submit", class="myButton") Ajouter un vin
         form(action="/logout", method="POST" style="display:inline-block")
-            button(type="submit", class="myButton") se deconnecter
+            button(type="submit", class="myButton") Déconnexion
         form(action="/", method="GET" style="display:inline-block")
             button(type="submit", class="myButton") Accueil
-        form(action="/vins", method="POST")
-        each item in Vines
-            div(style="margin-left:2%;margin-top:1%")
-                span(style="font-size:25px")= item.Name
-                li(style="display:block")= item.Description
-                li(style="display:inline-block")= item.Quantity
-                form(action="/plus", method="POST" style="display:inline-block;margin-left:2%")
-                    button(type="submit") +
-                    input(type="hidden", name="plus", value=item.id)
-                form(action="/minus", method="POST" style="display:inline-block")
-                    button(type="submit") -
-                    input(type="hidden", name="minus", value=item.id)
+        div(style="margin-left:2%;margin-top:2%")
+            table
+                thead
+                    tr
+                        th Nom
+                        th Description
+                        th Quantité
+                tbody
+                    each item in Vines
+                        tr
+                            td()= item.Name
+                            td()= item.Description
+                            td()= item.Quantity
+                                form(action="/plus", method="POST" style="display:inline-block;margin-left:10%")
+                                    button(type="submit" class="myButton") +
+                                    input(type="hidden", name="plus", value=item.id)
+                                form(action="/minus", method="POST" style="display:inline-block;margin-left:2%")
+                                    button(type="submit" class="myButton") -
+                                    input(type="hidden", name="minus", value=item.id)

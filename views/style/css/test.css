@@ -58,3 +58,69 @@ body {
   .myBox {
     border-radius: 4px;
   }
+
+  table {
+    table-layout: fixed;
+    width: 90%;
+    border-collapse: collapse;
+    border: 3px solid #eae0c2;
+  }
+  
+  thead th:nth-child(1) {
+    width: 10%;
+  }
+  
+  thead th:nth-child(2) {
+    width: 80%;
+  }
+  
+  thead th:nth-child(3) {
+    width: 10%;
+  }
+
+  th, td {
+    padding: 10px;
+  }
+
+  thead, tfoot {
+    color: white;
+    font-size: 15px;
+    text-shadow: 2px 2px 2px black;
+  }
+  
+  thead th, tfoot th, tfoot td {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+    border: 3px solid #eae0c2;
+  }
+
+  /* zebrure */
+
+  tbody tr:nth-child(odd) {
+    background-color: #3f3c34;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #968e76;
+  }
+  
+  table {
+    background-color: #332b23;
+  }
+
+  .myBox {
+    box-shadow: 0px 1px 0px 0px #1c1b18;
+    background:linear-gradient(to bottom, #4e4b3f 5%, #27261f 100%);
+    background-color:#4e4b3f;
+    border:2px solid #333029;
+    display:inline-block;
+    color: white;
+    font-family:Arial;
+    font-size:14px;
+    font-weight:bold;
+    padding:8px 12px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px black;
+    width: 20%;
+    margin-left: 43%;
+    text-align: center;
+  }
