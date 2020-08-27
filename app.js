@@ -105,10 +105,12 @@ Vine.sync({ force: false });
 
 app.get('/', (req, res, next) => {
     console.log('GET ACCUEIL');
-    if (!req.session.email)
-        res.render('accueil');
+    if (!req.session.email) {
+        res.redirect('/login');
+        req.flash('info','Veuillez vous connecter');
+    }
     else
-        res.redirect('/');
+        res.render('accueil');
 });
 
 app.get('/vins', async function(req, res) {
