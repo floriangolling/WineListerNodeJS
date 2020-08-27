@@ -124,3 +124,29 @@ body {
     margin-left: 43%;
     text-align: center;
   }
+
+  .topnav {
+    background-color: #3f3c34;
+    overflow: hidden;
+    border-bottom:2px solid #ccc2a6;
+  }
+  
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border-right: 2px solid #ccc2a6;
+  }
+  
+  .topnav a:hover {
+    background-color: #1d1b18;
+    color: white;
+  }
+  
+  .topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+  }

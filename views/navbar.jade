@@ -1,0 +1,9 @@
+mixin navLink(link, name)
+    a(href=link) #{name}
+
+div(class="topnav")
+    +navLink('/','Accueil')
+    +navLink('/register',"S'enregistrer")
+    +navLink('/login','Se connecter')
+    +navLink('/add',"Ajout d'un vin")
+    +navLink('/vins',"Voir les vins")

@@ -4,7 +4,7 @@
 const express = require('express');
 const { request, Router } = require('express');
 const app = express();
-const port = process.env.PORT
+const port = 8080
 const Sequelize = require('sequelize');
 let bodyParser = require('body-parser');
 const { updateLanguageServiceSourceFile } = require('typescript');
@@ -17,6 +17,7 @@ const sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: './database.sqlite'
 });
+let flash = require('express-flash');
 
 /*      //VARIABLE GLOBALE                                                                                                              ////////////////////////////////////////////////////////////////////
         PORT: utilisation sur le site de déploiement "process.env.PORT" et en local 8080;
@@ -71,6 +72,7 @@ Vine.init({
         User: password, username;
 */      //MODEL TABLE                                                                                                              ////////////////////////////////////////////////////////////////////
 
+app.use(flash());
 app.use(cookieParser())
 app.use(session({secret: 'ssshhhhh',
                 resave: false,
@@ -106,14 +108,15 @@ app.get('/', (req, res, next) => {
     if (!req.session.email)
         res.render('accueil');
     else
-        res.render('connected');
+        res.redirect('/vins');
 });
 
 app.get('/vins', async function(req, res) {
     console.log('VINE GET');
-    if (!req.session.email)
-        res.redirect('/');
-    else {
+    if (!req.session.email) {
+        req.flash('info','Veuillez vous connecter');
+        res.redirect('/login');
+    } else {
         const vine = await Vine.findAll({ where: { username: req.session.email }});
         if (vine == null)
             res.redirect('/add');
@@ -185,9 +188,10 @@ app.post('/plus', async function(req, res) {
 
 app.get('/add', (req, res, next) => {
     console.log('GET ADD');
-    if (!req.session.email)
-        res.redirect('/');
-    else {
+    if (!req.session.email) {
+        req.flash('info','Veuillez vous connecter');
+        res.redirect('/login');
+    } else {
         res.render('add');
     }
 });
@@ -200,13 +204,21 @@ app.post('/logout', function(req, res) {
 });
 
 app.get('/register', function(req, res) {
-    console.log('GET REGISTER');
-    res.render('register');
+    if (!req.session.email) {
+        console.log('GET REGISTER');
+        res.render('register');
+    } else {
+        res.redirect('/vins')
+    }
 });
 
 app.get('/login', function(req, res) {
-    console.log('GET LOGIN');
-    res.render('login');
+    if (!req.session.email) {
+        console.log('GET LOGIN');
+        res.render('login');
+    } else {
+        res.redirect('/vins')
+    }
 });
 
 app.post('/login', async function(req, res) {
@@ -221,10 +233,12 @@ app.post('/login', async function(req, res) {
             res.redirect('/');
         } else {
             console.log('invalid password');
-            res.redirect('/login')
+            req.flash('info','Mauvais mot de passe');
+            res.redirect('/login');
         }
     } else {
         console.log('invalid account');
+        req.flash('info',"Le compte n'existe pas");
         res.redirect('/login');
     }
 });
@@ -239,6 +253,7 @@ app.post('/register', async function(req, res) {
         res.redirect('/login')
     } else {
         console.log('le compte existe déjà');
+        req.flash('info','Le compte existe déjà');
         res.render('register');
     }
 });

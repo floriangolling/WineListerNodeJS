@@ -2,11 +2,23 @@ doctype html
 html
     head
         title Page d'accueil
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous")
         style
+            include ../node_modules/@fortawesome/fontawesome-free/css/all.css
             include style/css/test.css
+            include style/css/login.css
+    include navbar
     body
-        h1(style="margin-left:37%")  Bienvenue dans la page d'accueil 🍷
-        form(action="/register",method="GET" )
-            button(type="submit", class="myButton", style="margin-left:47%") S'enregistrer
-        form(action="/login",method="GET" )
-            button(type="submit", class="myButton", style="margin-left:47%") Se connecter
+        div(class="modal-dialog text-center")
+            div(class="col-sm-8 main-section")
+                h1(class="mytitle") Accueil
+                div(class="modal-content")
+                    div(class="col-12 user-img")
+                        img(src="vine.png", alt="")
+                    form(class="col-12" action="/Register",method="POST")
+                        div(class="form-group")
+                            div(class="form-control") instagram @simonmeyerrr
+    script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous")
+    script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous")
+    script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous")
+    script(src='https://kit.fontawesome.com/a076d05399.js')
