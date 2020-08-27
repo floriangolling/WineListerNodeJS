@@ -3,12 +3,16 @@ html
     head
         title Page d'accueil
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous")
+        script( src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
         style
             include ../node_modules/@fortawesome/fontawesome-free/css/all.css
             include style/css/test.css
     include navbar
     body
-        div()
+        div#app
+            div(class="")
+                form(class="")
+                    input(type="text" v-model='search' class="form-control" style="margin:0" placeholder="Rechercher un vin..")
             table
                 thead
                     tr
@@ -16,17 +20,32 @@ html
                         th Description
                         th Quantité
                 tbody
-                    each item in Vines
-                        tr
-                            td()= item.Name
-                            td()= item.Description
-                            td()= item.Quantity
-                                form(action="/plus", method="POST" style="display:inline-block;margin-left:10%")
-                                    button(type="submit" class="myButton") +
-                                    input(type="hidden", name="plus", value=item.id)
-                                form(action="/minus", method="POST" style="display:inline-block;margin-left:2%")
-                                    button(type="submit" class="myButton") -
-                                    input(type="hidden", name="minus", value=item.id)
-                                form(action="/rm", method="POST" style="display:inline-block;margin-left:2%")
-                                    button(type="submit" class="myButton") 🗑
-                                    input(type="hidden", name="minus", value=item.id)
+                    //- each item in Vines
+                    tr(v-for="vine in filteredList")
+                        td {{ vine.Name }}
+                        td {{ vine.Description }}
+                        td {{ vine.Quantity}}
+                            form(action="/plus", method="POST" style="display:inline-block;margin-left:10%")
+                                button(type="submit" class="myButton") +
+                                input(type="hidden", name="plus", :value="vine.id")
+                            form(action="/minus", method="POST" style="display:inline-block;margin-left:2%")
+                                button(type="submit" class="myButton") -
+                                input(type="hidden", name="minus", :value="vine.id")
+                            form(action="/rm", method="POST" style="display:inline-block;margin-left:2%")
+                                button(type="submit" class="myButton") 🗑
+                                input(type="hidden", name="minus", :value="vine.id")
+        script(type="text/javascript").
+            const app = new Vue({
+                el:"#app",
+                data: {
+                    search: '',
+                    vineList : !{JSON.stringify(Vines)}
+                },
+                computed: {
+                    filteredList() {
+                        return this.vineList.filter(vine => {
+                            return vine.Name.toLowerCase().includes(this.search.toLowerCase())
+                        })
+                    }
+                }
+            })
