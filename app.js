@@ -108,7 +108,7 @@ app.get('/', (req, res, next) => {
     if (!req.session.email)
         res.render('accueil');
     else
-        res.redirect('/vins');
+        res.redirect('/');
 });
 
 app.get('/vins', async function(req, res) {
