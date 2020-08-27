@@ -7,3 +7,6 @@ div(class="topnav")
     +navLink('/login','Se connecter')
     +navLink('/add',"Ajout d'un vin")
     +navLink('/vins',"Voir les vins")
+    -if(messages.Co)
+                .message.Co
+                    +navLink('/logout', 'Se deconnecter')

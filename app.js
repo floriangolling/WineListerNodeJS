@@ -109,8 +109,10 @@ app.get('/', (req, res, next) => {
         res.redirect('/login');
         req.flash('info','Veuillez vous connecter');
     }
-    else
+    else {
+        req.flash('Co','Se déconnecter');
         res.render('accueil');
+    }
 });
 
 app.get('/vins', async function(req, res) {
@@ -124,6 +126,7 @@ app.get('/vins', async function(req, res) {
             res.redirect('/add');
         else {
             console.log('les vins sont bien trouvés');
+            req.flash('Co','Se déconnecter');
             res.render('vins', {Vines: vine});
         }
     }
@@ -194,11 +197,12 @@ app.get('/add', (req, res, next) => {
         req.flash('info','Veuillez vous connecter');
         res.redirect('/login');
     } else {
+        req.flash('Co','Se déconnecter');
         res.render('add');
     }
 });
 
-app.post('/logout', function(req, res) {
+app.get('/logout', function(req, res) {
     console.log('POST LOGOUT');
     console.log('loggin out');
     req.session.destroy();
@@ -210,7 +214,7 @@ app.get('/register', function(req, res) {
         console.log('GET REGISTER');
         res.render('register');
     } else {
-        res.redirect('/vins')
+        res.redirect('/')
     }
 });
 
@@ -219,7 +223,7 @@ app.get('/login', function(req, res) {
         console.log('GET LOGIN');
         res.render('login');
     } else {
-        res.redirect('/vins')
+        res.redirect('/')
     }
 });
 
