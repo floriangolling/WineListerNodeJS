@@ -1,0 +1,152 @@
+body {
+    font: 100% Helvetica, sans-serif;
+    color: #FFFFFF;
+    background-image: linear-gradient(to bottom, rgba(51, 43, 35, 0.93), rgba(51, 43, 35, 0.93)), url('wood.jpg');
+  }
+  
+    .myButton {
+      box-shadow: 0px 1px 0px 0px #1c1b18;
+      background:linear-gradient(to bottom, #eae0c2 5%, #ccc2a6 100%);
+      background-color:#eae0c2;
+      border-radius:15px;
+      border:2px solid #333029;
+      display:inline-block;
+      cursor:pointer;
+      color: #333029;
+      font-family:Arial;
+      font-size:14px;
+      font-weight:bold;
+      padding:8px 12px;
+      text-decoration:none;
+      text-shadow:0px 1px 0px #ffffff;
+    }
+    .myButton:hover {
+      background:linear-gradient(to bottom, #ccc2a6 5%, #eae0c2 100%);
+      background-color:#ccc2a6;
+    }
+    .myButton:active {
+      position:relative;
+      top:1px;
+    }
+  
+    input,
+    .btn {
+      width: 15%;
+      padding: 12px;
+      border: none;
+      border-radius: 4px;
+      margin: 0px 45%;
+      opacity: 0.85;
+      display: inline-block;
+      font-size: 17px;
+      line-height: 20px;
+      text-decoration: none;
+    }
+  
+    input:hover,
+    .btn:hover {
+      opacity: 1;
+    }
+  
+    .myTitle {
+      margin-top: 15%;
+      font-size: 30px;
+      margin-left: 50%;
+    }
+  
+    .myBox {
+      border-radius: 4px;
+    }
+  
+    table {
+      table-layout: fixed;
+      width: 100%;
+      border-collapse: collapse;
+      border: 3px solid #eae0c2;
+      border-radius: 20px;
+    }
+    
+    thead th:nth-child(1) {
+      width: 10%;
+    }
+    
+    thead th:nth-child(2) {
+      width: 90%;
+    }
+    
+    th, td {
+      padding: 10px;
+      font-size: 17px;
+      text-shadow: 1px 1px 1px black;
+    }
+  
+    thead, tfoot {
+      color: white;
+      font-size: 15px;
+      text-shadow: 3px 3px 2px black;
+    }
+    
+    thead th, tfoot th, tfoot td {
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+      border: 3px solid #eae0c2;
+    }
+  
+    /* zebrure */
+  
+    tbody tr:nth-child(odd) {
+      background-image: linear-gradient(to bottom, rgba(63, 60, 52, 0.85), rgba(63, 60, 52, 0.85)), url('wood.jpg');
+    }
+    
+    tbody tr:nth-child(even) {
+      background-image: linear-gradient(to bottom, rgba(150, 142, 118, 0.85), rgba(150, 142, 118, 0.85)), url('wood.jpg');
+    }
+    
+    table {
+      background-color: #332b23;
+      border-radius: 20px;
+    }
+  
+    .myBox {
+      box-shadow: 0px 1px 0px 0px #1c1b18;
+      background:linear-gradient(to bottom, #4e4b3f 5%, #27261f 100%);
+      background-color:#4e4b3f;
+      border:2px solid #333029;
+      display:inline-block;
+      color: white;
+      font-family:Arial;
+      font-size:14px;
+      font-weight:bold;
+      padding:8px 12px;
+      text-decoration:none;
+      text-shadow:0px 1px 0px black;
+      width: 20%;
+      margin-left: 43%;
+      text-align: center;
+    }
+  
+    .topnav {
+      background-color: #3f3c34;
+      overflow: hidden;
+      border-bottom:2px solid #ccc2a6;
+      border-radius: 10px;
+    }
+    
+    .topnav a {
+      float: left;
+      color: #f2f2f2;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+      border-right: 2px solid #ccc2a6;
+    }
+    
+    .topnav a:hover {
+      background-color: #1d1b18;
+      color: white;
+    }
+    
+    .topnav a.active {
+      background-color: #4CAF50;
+      color: white;
+    }

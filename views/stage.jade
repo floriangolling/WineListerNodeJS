@@ -1,0 +1,45 @@
+doctype html
+html
+    head
+        title Page d'accueil
+        link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous")
+        script( src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+        script(type="text/javascript").
+            function change(test) {
+                var nice = '' + test;
+                document.getElementById(nice).value = document.getElementById(nice).value + 1;
+                console.log(document.getElementById(test))
+            }
+        style
+            include ../node_modules/@fortawesome/fontawesome-free/css/all.css
+            include style/css/test.css
+    include navbar
+    body()
+        div#app
+            div(class="")
+                form(class="")
+                    input(type="text" v-model='search' class="form-control" style="margin:0" placeholder="Rechercher une semaine de stage...")
+            table
+                thead
+                    tr
+                        th Week n°
+                        th Description
+                tbody
+                    tr(v-for="stage in filteredList")
+                        td {{ stage.Week }}
+                        td {{ stage.Description }}
+        script(type="text/javascript").
+            const app = new Vue({
+                el:"#app",
+                data: {
+                    search: '',
+                    stageList : !{JSON.stringify(Stages)}
+                },
+                computed: {
+                    filteredList() {
+                        return this.stageList.filter(stage => {
+                            return stage.Name.toLowerCase().includes(this.search.toLowerCase())
+                        })
+                    }
+                }
+            })

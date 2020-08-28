@@ -4,7 +4,7 @@
 const express = require('express');
 const { request, Router } = require('express');
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT
 const Sequelize = require('sequelize');
 let bodyParser = require('body-parser');
 const { updateLanguageServiceSourceFile } = require('typescript');
@@ -36,7 +36,7 @@ User.init({
         type: Sequelize.STRING,
         allowNull: false
     }}, {
-    sequelize, 
+    sequelize,
     modelName: 'user'
 });
 
@@ -60,6 +60,24 @@ Vine.init({
     }} , {
     sequelize,
     modelName: 'vine'
+});
+
+class Stage extends Model {}
+Stage.init({
+  Week: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+    Description: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    username: {
+        type: Sequelize.STRING,
+        allowNull: false
+    }} , {
+    sequelize,
+    modelName: 'stage'
 });
 
 /*      //MODEL TABLE                                                                                                              ////////////////////////////////////////////////////////////////////
@@ -94,6 +112,7 @@ sequelize
 
 User.sync({ force: false });
 Vine.sync({ force: false });
+Stage.sync({ force: true });
 
 /*      //SEQUELIZE                                                                                                                     ////////////////////////////////////////////////////////////////////
         SEQUELIZE: permet de se connecter a la DB, renvoie une erreur si ce n'est pas possible.
@@ -125,6 +144,22 @@ app.get('/vins', async function(req, res) {
             console.log('les vins sont bien trouvés');
             req.flash('Co','Se déconnecter');
             res.render('vins', {Vines: vine});
+        }
+    }
+});
+
+app.get('/stage', async function(req, res) {
+    console.log('STAGE GET');
+    if (!req.session.email) {
+        req.flash('info','Veuillez vous connecter');
+        res.redirect('/login');
+    } else {
+        const sta = await Stage.findAll({ where: { username: req.session.email }});
+        if (sta == null)
+            res.redirect('/addstage');
+        else {
+            req.flash('Co','Se déconnecter');
+            res.render('stage', {Stages: sta});
         }
     }
 });
