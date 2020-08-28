@@ -18,23 +18,23 @@ html
         div#app
             div(class="")
                 form(class="")
-                    input(type="text" v-model='search' class="form-control" style="margin:0" placeholder="Rechercher un vin..")
+                    input#app(type="text" v-model='search' class="form-control" style="margin:0" placeholder="Rechercher un vin..")
             table
                 thead
                     tr
                         th Nom
                         th Description
                         th Quantité
-                tbody#app2
+                tbody
                     tr(v-for="vine in filteredList")
                         td {{ vine.Name }}
                         td {{ vine.Description }}
                         td(:value="vine.Quantity",:id="vine.id") {{ vine.Quantity}}
                             form(action="/plus", method="POST" style="display:inline-block;margin-left:10%")
-                                button(type="submit" class="myButton",:value="vine.id" onclick="change(value)") +
+                                button(type="submit" class="myButton",:value="vine.id" v-on:click="plus(vine)") +
                                 input(type="hidden", name="plus", :value="vine.id" ,)
                             form(action="/minus", method="POST" style="display:inline-block;margin-left:2%")
-                                button(type="submit" class="myButton" style="font-size:14px") -
+                                button(type="submit" class="myButton" style="font-size:14px" v-on:click="minus(vine)") -
                                 input(type="hidden", name="minus", :value="vine.id")
                             form(action="/rm", method="POST" style="display:inline-block;margin-left:2%")
                                 button(type="submit" class="myButton" style="font-size:10px") 🗑
@@ -44,7 +44,18 @@ html
                 el:"#app",
                 data: {
                     search: '',
-                    vineList : !{JSON.stringify(Vines)}
+                    vineList : !{JSON.stringify(Vines)},
+                    quantity: !{JSON.stringify(Vines)}
+                },
+                methods:{
+                        minus: function(test) {
+                            test.Quantity = test.Quantity - 1;
+                            if (test.Quantity < 0)
+                                test.Quantity = 0;
+                        },
+                        plus: function(test) {
+                            test.Quantity = test.Quantity + 1;
+                        }
                 },
                 computed: {
                     filteredList() {

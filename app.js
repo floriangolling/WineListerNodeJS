@@ -137,7 +137,9 @@ app.get('/vins', async function(req, res) {
         req.flash('info','Veuillez vous connecter');
         res.redirect('/login');
     } else {
-        const vine = await Vine.findAll({ where: { username: req.session.email }});
+        const vine = await Vine.findAll({ where: { username: req.session.email }, order: [
+            ['Name', 'ASC'],
+        ]});
         if (vine == null)
             res.redirect('/add');
         else {
@@ -202,7 +204,6 @@ app.post('/minus', async function(req, res) {
         console.log('NEW QUANTITY =' + quan)
         await Vine.update({ Quantity: quan }, {where:{ id: req.body.minus, username: req.session.email }})
         console.log('vin bien réduit');
-        res.redirect('/vins');
     }
 });
 
@@ -231,7 +232,6 @@ app.post('/plus', async function(req, res) {
         await Vine.update({ Quantity: quan }, {where:{ id: req.body.plus, username: req.session.email }})
         console.log('vin bien ajouté');
         console.log('username =' + req.session.email);
-        res.redirect('/vins');
     }
 });
 
