@@ -4,7 +4,7 @@
 const express = require('express');
 const { request, Router } = require('express');
 const app = express();
-const port = 8080;
+const port = process.env.PORT;
 const Sequelize = require('sequelize');
 let bodyParser = require('body-parser');
 const { updateLanguageServiceSourceFile } = require('typescript');
