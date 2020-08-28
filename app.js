@@ -4,7 +4,7 @@
 const express = require('express');
 const { request, Router } = require('express');
 const app = express();
-const port = process.env.PORT
+const port = 8080;
 const Sequelize = require('sequelize');
 let bodyParser = require('body-parser');
 const { updateLanguageServiceSourceFile } = require('typescript');
@@ -13,10 +13,7 @@ let urlencodedParser = bodyParser.urlencoded({ extended: false });
 let session = require('express-session');
 let cookieParser = require('cookie-parser');
 const Model = Sequelize.Model;
-const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: './database.sqlite'
-});
+const sequelize = new Sequelize('postgres://smwtvuyw:yq9QMmFpJQzzhEgEp7rtslRouQsQyGFv@kandula.db.elephantsql.com:5432/smwtvuyw')
 let flash = require('express-flash');
 
 /*      //VARIABLE GLOBALE                                                                                                              ////////////////////////////////////////////////////////////////////

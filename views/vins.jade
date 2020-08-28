@@ -4,6 +4,12 @@ html
         title Page d'accueil
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous")
         script( src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+        script(type="text/javascript").
+            function change(test) {
+                var nice = '' + test;
+                document.getElementById(nice).value = document.getElementById(nice).value + 1;
+                console.log(document.getElementById(test))
+            }
         style
             include ../node_modules/@fortawesome/fontawesome-free/css/all.css
             include style/css/test.css
@@ -19,13 +25,13 @@ html
                         th Nom
                         th Description
                         th Quantité
-                tbody
+                tbody#app2
                     tr(v-for="vine in filteredList")
                         td {{ vine.Name }}
                         td {{ vine.Description }}
-                        td {{ vine.Quantity}}
+                        td(:value="vine.Quantity",:id="vine.id") {{ vine.Quantity}}
                             form(action="/plus", method="POST" style="display:inline-block;margin-left:10%")
-                                button(type="submit" class="myButton" id="pluss") +
+                                button(type="submit" class="myButton",:value="vine.id" onclick="change(value)") +
                                 input(type="hidden", name="plus", :value="vine.id" ,)
                             form(action="/minus", method="POST" style="display:inline-block;margin-left:2%")
                                 button(type="submit" class="myButton" style="font-size:14px") -
