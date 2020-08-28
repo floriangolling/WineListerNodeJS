@@ -112,7 +112,7 @@ sequelize
 
 User.sync({ force: false });
 Vine.sync({ force: false });
-Stage.sync({ force: false });
+Stage.sync({ force: true });
 
 /*      //SEQUELIZE                                                                                                                     ////////////////////////////////////////////////////////////////////
         SEQUELIZE: permet de se connecter a la DB, renvoie une erreur si ce n'est pas possible.
