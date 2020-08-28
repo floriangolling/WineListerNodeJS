@@ -36,7 +36,7 @@ User.init({
         type: Sequelize.STRING,
         allowNull: false
     }}, {
-    sequelize,
+    sequelize, 
     modelName: 'user'
 });
 

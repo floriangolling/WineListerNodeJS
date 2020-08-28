@@ -93,6 +93,7 @@ button {
     background-color: #3f3c34;
     overflow: hidden;
     border-bottom:2px solid #ccc2a6;
+    border-radius: 10px;
   }
   
   .topnav a {

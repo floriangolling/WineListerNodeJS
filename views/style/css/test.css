@@ -63,6 +63,7 @@ body {
     width: 100%;
     border-collapse: collapse;
     border: 3px solid #eae0c2;
+    border-radius: 20px;
   }
   
   thead th:nth-child(1) {
@@ -106,6 +107,7 @@ body {
   
   table {
     background-color: #332b23;
+    border-radius: 20px;
   }
 
   .myBox {
@@ -130,6 +132,7 @@ body {
     background-color: #3f3c34;
     overflow: hidden;
     border-bottom:2px solid #ccc2a6;
+    border-radius: 10px;
   }
   
   .topnav a {
