@@ -65,7 +65,7 @@ Vine.init({
 class Stage extends Model {}
 Stage.init({
   Week: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false
   },
     Description: {
@@ -112,7 +112,7 @@ sequelize
 
 User.sync({ force: false });
 Vine.sync({ force: false });
-Stage.sync({ force: true });
+Stage.sync({ force: false });
 
 /*      //SEQUELIZE                                                                                                                     ////////////////////////////////////////////////////////////////////
         SEQUELIZE: permet de se connecter a la DB, renvoie une erreur si ce n'est pas possible.
@@ -176,6 +176,18 @@ app.post('/add', async function(req, res) {
     }
 });
 
+app.post('/addstage', async function(req, res) {
+    console.log('ADD');
+    console.log(req.body);
+    if (!req.session.email)
+        res.redirect('/');
+    else {
+        await Stage.create({ username: req.session.email, Description: req.body.description, Week: req.body.week });
+        console.log('stage bien rajouté');
+        res.redirect('/stage');
+    }
+});
+
 app.post('/minus', async function(req, res) {
     console.log('MINUS');
     console.log(req.body);
@@ -231,6 +243,17 @@ app.get('/add', (req, res, next) => {
     } else {
         req.flash('Co','Se déconnecter');
         res.render('add');
+    }
+});
+
+app.get('/addstage', (req, res, next) => {
+    console.log('GET ADD');
+    if (!req.session.email) {
+        req.flash('info','Veuillez vous connecter');
+        res.redirect('/login');
+    } else {
+        req.flash('Co','Se déconnecter');
+        res.render('addstage');
     }
 });
 

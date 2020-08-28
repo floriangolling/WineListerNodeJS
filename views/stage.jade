@@ -15,7 +15,7 @@ html
             include style/css/test.css
     include navbar
     body()
-        div#app
+        div#app3
             div(class="")
                 form(class="")
                     input(type="text" v-model='search' class="form-control" style="margin:0" placeholder="Rechercher une semaine de stage...")
@@ -30,7 +30,7 @@ html
                         td {{ stage.Description }}
         script(type="text/javascript").
             const app = new Vue({
-                el:"#app",
+                el:"#app3",
                 data: {
                     search: '',
                     stageList : !{JSON.stringify(Stages)}
@@ -38,7 +38,7 @@ html
                 computed: {
                     filteredList() {
                         return this.stageList.filter(stage => {
-                            return stage.Name.toLowerCase().includes(this.search.toLowerCase())
+                            return stage.Week.toLowerCase().includes(this.search.toLowerCase())
                         })
                     }
                 }
