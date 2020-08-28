@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #332b23;
+    background-image: linear-gradient(to bottom, rgba(51, 43, 35, 0.93), rgba(51, 43, 35, 0.93)), url('wood.jpg');
 }
 
 .main-section {
@@ -12,8 +11,8 @@ body {
 }
 
 .modal-content {
-    background-color: #3f3c34;
-    opacity: 0.95;
+    background-image: linear-gradient(to bottom, rgba(63, 60, 52, 0.96), rgba(63, 60, 52, 0.96)), url('wood.jpg');
+    opacity: 1;
     padding: 0 18px;
     box-shadow: 0px 0px 3px #ccc2a6;
 }
@@ -49,9 +48,16 @@ body {
     padding-top: 4px;
 }
 
+.test {
+    position: absolute;
+    font-size: 22px;
+    left: 28px;
+    padding-top: 7px;
+}
+
 .form-group:last-of-type::before {
     font-family: "Font Awesome 5 Free";
-    content: "\f3c1";
+    content:none;
 }
 
 button {
@@ -84,7 +90,7 @@ button {
     margin-right: 7px;
 }
   .topnav {
-    background-color: #3f3c34;
+    background-image: linear-gradient(to bottom, rgba(63, 60, 52, 0.96), rgba(63, 60, 52, 0.96)), url('wood.jpg');
     overflow: hidden;
     border-bottom:2px solid #ccc2a6;
   }
@@ -100,7 +106,7 @@ button {
   }
   
   .topnav a:hover {
-    background-color: #1d1b18;
+    background-image: linear-gradient(to bottom, rgba(29, 27, 24, 0.96), rgba(29, 27, 24, 0.96)), url('wood.jpg');
     color: white;
   }
   

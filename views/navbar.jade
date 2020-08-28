@@ -3,10 +3,11 @@ mixin navLink(link, name)
 
 div(class="topnav")
     +navLink('/','Accueil')
-    +navLink('/register',"S'enregistrer")
-    +navLink('/login','Se connecter')
-    +navLink('/add',"Ajout d'un vin")
-    +navLink('/vins',"Voir les vins")
     -if(messages.Co)
                 .message.Co
+                    +navLink('/add',"Ajout d'un vin")
+                    +navLink('/vins',"Voir les vins")
                     +navLink('/logout', 'Se deconnecter')
+    -else
+        +navLink('/register',"S'enregistrer")
+        +navLink('/login','Se connecter')

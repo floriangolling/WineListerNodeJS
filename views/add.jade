@@ -5,21 +5,25 @@ html
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous")
         style
             include ../node_modules/@fortawesome/fontawesome-free/css/all.css
-            include style/css/login.css
+            include style/css/add.css
     include navbar
     body
         div(class="modal-dialog text-center")
             div(class="col-sm-8 main-section")
-                h1(class="mytitle") Wine Lister
+                h1(class="mytitle" style="padding-bottom:0px") Wine Lister
+                h1(class="mytitle" style="font-size:20px;padding-bottom:40px") Ajout d'un vin
                 div(class="modal-content")
                     div(class="col-12 user-img")
                         img(src="vine.png", alt="")
                     form(class="col-12" action="/add",method="POST")
                         div(class="form-group")
+                            i(class="fas fa-wine-bottle test")
                             input(type="text" class="form-control" placeholder="Nom" name="name" required)
                         div(class="form-group")
+                            i(class="fas fa-glass-cheers test")
                             input(type="text", name="description", class="form-control" placeholder="Description" required)
                         div(class="form-group")
+                            i(class="fas fa-sort-numeric-up-alt test")
                             input(type="number", name="quantity", class="form-control" placeholder="0" min="0" required)
                         button(type="submit" class="btn" style="padding: 7px 0px")
                             i(class="fas fa-sign-in-alt") Ajouter

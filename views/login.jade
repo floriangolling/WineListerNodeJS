@@ -10,7 +10,8 @@ html
     body
         div(class="modal-dialog text-center")
             div(class="col-sm-8 main-section")
-                h1(class="mytitle") Wine Lister
+                h1(class="mytitle" style="padding-bottom:0px") Wine Lister
+                h1(class="mytitle" style="font-size:20px;padding-bottom:40px") Se connecter
                 div(class="modal-content")
                     div(class="col-12 user-img")
                         img(src="vine.png", alt="")
@@ -18,12 +19,13 @@ html
                         div(class="form-group")
                             input(type="text" class="form-control" placeholder="User" name="prenom" required)
                         div(class="form-group")
+                            i(class="fa fa-lock test")
                             input(type="password", name="password", class="form-control" placeholder="Password" required)
                         button(type="submit" class="btn")
                             i(class="fas fa-sign-in-alt") Login
             -if(messages.info)
                 .message.info
-                    span= messages.info
+                    span(class="alert alert-danger")= messages.info
         script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous")
         script(src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous")
         script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous")

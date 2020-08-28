@@ -1,8 +1,7 @@
 body {
   font: 100% Helvetica, sans-serif;
   color: #FFFFFF;
-  background-color: #332b23;
-
+  background-image: linear-gradient(to bottom, rgba(51, 43, 35, 0.93), rgba(51, 43, 35, 0.93)), url('wood.jpg');
 }
 
   .myButton {
@@ -80,12 +79,14 @@ body {
 
   th, td {
     padding: 10px;
+    font-size: 17px;
+    text-shadow: 1px 1px 1px black;
   }
 
   thead, tfoot {
     color: white;
     font-size: 15px;
-    text-shadow: 2px 2px 2px black;
+    text-shadow: 3px 3px 2px black;
   }
   
   thead th, tfoot th, tfoot td {
@@ -96,11 +97,11 @@ body {
   /* zebrure */
 
   tbody tr:nth-child(odd) {
-    background-color: #3f3c34;
+    background-image: linear-gradient(to bottom, rgba(63, 60, 52, 0.85), rgba(63, 60, 52, 0.85)), url('wood.jpg');
   }
   
   tbody tr:nth-child(even) {
-    background-color: #968e76;
+    background-image: linear-gradient(to bottom, rgba(150, 142, 118, 0.85), rgba(150, 142, 118, 0.85)), url('wood.jpg');
   }
   
   table {
