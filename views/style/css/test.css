@@ -154,3 +154,7 @@ body {
     background-color: #4CAF50;
     color: white;
   }
+
+  .allButFooter {
+    min-height: calc(100vh - 40px);
+}

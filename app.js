@@ -190,20 +190,20 @@ app.post('/addstage', async function(req, res) {
     }
 });
 
-app.post('/minus', async function(req, res) {
+app.put('/minus/:id', async function(req, res) {
     console.log('MINUS');
-    console.log(req.body);
     if (!req.session.email)
         res.redirect('/');
     else {
-        const thisone = await Vine.findOne({ where: { username: req.session.email, id: req.body.minus }} )
+        const thisone = await Vine.findOne({ where: { username: req.session.email, id: req.params.id }} )
         console.log(thisone);
         let quan = thisone.Quantity - 1;
         if (quan < 0)
             quan = 0;
         console.log('NEW QUANTITY =' + quan)
-        await Vine.update({ Quantity: quan }, {where:{ id: req.body.minus, username: req.session.email }})
+        let send = await Vine.update({ Quantity: quan }, {where:{ id: req.params.id, username: req.session.email }})
         console.log('vin bien réduit');
+        res.send(send)
     }
 });
 
@@ -219,19 +219,20 @@ app.post('/rm', async function(req, res) {
     }
 });
 
-app.post('/plus', async function(req, res) {
+app.put('/plus/:id', async function(req, res) {
     console.log('PLUS');
     console.log(req.body);
     if (!req.session.email)
         res.redirect('/');
     else {
-        const thisone = await Vine.findOne({ where: { username: req.session.email, id: req.body.plus }} )
+        const thisone = await Vine.findOne({ where: { username: req.session.email, id: req.params.id }} )
         console.log(thisone);
         let quan = thisone.Quantity + 1;
         console.log('NEW QUANTITY =' + quan)
-        await Vine.update({ Quantity: quan }, {where:{ id: req.body.plus, username: req.session.email }})
+        let send = await Vine.update({ Quantity: quan }, {where:{ id: req.params.id, username: req.session.email }})
         console.log('vin bien ajouté');
         console.log('username =' + req.session.email);
+        res.send(send)
     }
 });
 
@@ -320,6 +321,7 @@ app.post('/register', async function(req, res) {
 });
 
 app.use("/", express.static(__dirname));
+app.use("/axios", express.static(__dirname + '/' + 'node_modules/axios/dist/'))
 
 app.use(function(req, res){
     res.status(404).send('Page introuvable !');
