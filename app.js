@@ -138,7 +138,7 @@ app.get('/vins', async function(req, res) {
         res.redirect('/login');
     } else {
         const vine = await Vine.findAll({ where: { username: req.session.email }, order: [
-            ['Name', 'ASC'],
+            ['id', 'ASC'],
         ]});
         if (vine == null)
             res.redirect('/add');
@@ -178,17 +178,17 @@ app.post('/add', async function(req, res) {
     }
 });
 
-app.post('/addstage', async function(req, res) {
+app.post('/add2/:name/:description/:quantity', async function(req, res) {
     console.log('ADD');
-    console.log(req.body);
     if (!req.session.email)
         res.redirect('/');
     else {
-        await Stage.create({ username: req.session.email, Description: req.body.description, Week: req.body.week });
-        console.log('stage bien rajouté');
-        res.redirect('/stage');
+        let newvine = await Vine.create({ username: req.session.email, Quantity: req.params.quantity, Description: req.params.description, Name: req.params.name });
+        console.log('vin bien rajouté');
+        res.send(newvine);
     }
 });
+
 
 app.put('/minus/:id', async function(req, res) {
     console.log('MINUS');

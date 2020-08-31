@@ -5,12 +5,6 @@ html
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous")
         script( src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
         script(src="/axios/axios.js")
-        script(type="text/javascript").
-            function change(test) {
-                var nice = '' + test;
-                document.getElementById(nice).value = document.getElementById(nice).value + 1;
-                console.log(document.getElementById(test))
-            }
         style
             include ../node_modules/@fortawesome/fontawesome-free/css/all.css
             include style/css/test.css
@@ -20,25 +14,33 @@ html
             div(class="")
                 form(class="")
                     input#app(type="text" v-model='search' class="form-control" style="margin:0" placeholder="Rechercher un vin..")
-            table
+            table(class="table-condensed")
                 thead
                     tr
                         th Nom
                         th Description
                         th Quantité
                 tbody
+                    tr
+                        td
+                            input(type="text" v-model="name" class="form" required style="width:100%;margin-left:0px" placeholder="Nom..")
+                        td
+                            input(type="text" v-model="description" class="form" style="width:100%;margin-left:0px" placeholder="Description.." required)
+                        td
+                            input(type="number" v-model="Vquantity" class="form"  min="0" placeholder="0.." style="width:60%;margin-left:0px;display:inline-block;margin-right:20px" required)
+                            button(v-on:click="addvine()" class="myButton" style="display:inline-block;margin-left:0px;float:right") +
                     tr(v-for="vine in filteredList")
                         td {{ vine.Name }}
                         td {{ vine.Description }}
                         td(:value="vine.Quantity",:id="vine.id") {{ vine.Quantity}}
-                            div(style="display:inline-block;margin-left:10%")
+                            div(style="display:inline-block;margin-left:5px;float:right")
                                 button( class="myButton",:value="vine.id" v-on:click="plus(vine)") +
                                 input(type="hidden", name="plus", :value="vine.id" ,)
-                            div(style="display:inline-block;margin-left:2%")
+                            div(style="display:inline-block;margin-left:5px;float:right")
                                 button( class="myButton" style="font-size:14px" v-on:click="minus(vine)") -
                                 input(type="hidden", name="minus", :value="vine.id")
-                            div(style="display:inline-block;margin-left:2%")
-                                button( class="myButton" style="font-size:10px" v-on:click="dele(vine)") 🗑
+                            div(style="display:inline-block;margin-left:5px;float:right")
+                                button( class="myButton" style="font-size:10px;margin-left:2%" v-on:click="dele(vine)") 🗑
                                 input(type="hidden", name="minus", :value="vine.id")
 
         script(type="text/javascript").
@@ -46,23 +48,52 @@ html
                 el:"#app",
                 data: {
                     search: '',
+                    name: '',
+                    description: '',
+                    Vquantity: '',
                     vineList : !{JSON.stringify(Vines)},
                     quantity: !{JSON.stringify(Vines)}
                 },
                 methods:{
                         minus: async function(test) {
-                            test.Quantity = test.Quantity - 1;
+                            test.Quantity = Number(test.Quantity) - 1;
                             if (test.Quantity < 0)
                                 test.Quantity = 0;
                             await axios.put('/minus/' + test.id)
                         },
                         plus: async function(test) {
-                            test.Quantity = test.Quantity + 1;
+                            test.Quantity = Number(test.Quantity) + 1;
                             await axios.put('/plus/' + test.id)
                         },
                         dele: async function(test) {
                             this.vineList.splice(test, 1);
                             await axios.delete('/rm/' + test.id)
+                        },
+                        addvine: async function() {
+                            let correct = true;
+                            let my_obj = {
+                                Name: this.name,
+                                Description: this.description,
+                                Quantity: this.Vquantity,
+                                id: '',
+                            };
+                            if (my_obj.Name == '')
+                                correct = false;
+                            if (my_obj.Description == '')
+                                correct = false;
+                            if (my_obj.Quantity == '')
+                                correct = false;
+                            if (isNaN(my_obj.Quantity))
+                                correct = false;
+                            if (correct == true) {
+                                let newvine = await axios.post('/add2/' + my_obj.Name + '/' + my_obj.Description + '/' + my_obj.Quantity)
+                                my_obj.id = newvine.data.id;
+                                this.vineList.push(my_obj);
+                                this.name = '';
+                                this.description = '';
+                                this.Vquantity = '';
+                                this.vineList.sortDirection = 'ASC'
+                            }
                         }
                 },
                 computed: {
