@@ -29,7 +29,7 @@ html
                         td
                             input(type="number" v-model="Vquantity" class="form"  min="0" placeholder="0.." style="width:60%;margin-left:0px;display:inline-block;margin-right:20px" required)
                             button(v-on:click="addvine()" class="myButton" style="display:inline-block;margin-left:0px;float:right") +
-                    tr(v-for="vine in filteredList")
+                    tr(v-for="(vine, index) in filteredList", :key="index")
                         td {{ vine.Name }}
                         td {{ vine.Description }}
                         td(:value="vine.Quantity",:id="vine.id") {{ vine.Quantity}}
@@ -40,7 +40,7 @@ html
                                 button( class="myButton" style="font-size:14px" v-on:click="minus(vine)") -
                                 input(type="hidden", name="minus", :value="vine.id")
                             div(style="display:inline-block;margin-left:5px;float:right")
-                                button( class="myButton" style="font-size:10px;margin-left:2%" v-on:click="dele(vine)") 🗑
+                                button( class="myButton" style="font-size:10px;margin-left:2%" v-on:click="dele(index, vine)") 🗑
                                 input(type="hidden", name="minus", :value="vine.id")
 
         script(type="text/javascript").
@@ -65,9 +65,9 @@ html
                             test.Quantity = Number(test.Quantity) + 1;
                             await axios.put('/plus/' + test.id)
                         },
-                        dele: async function(test) {
+                        dele: async function(test, obj) {
                             this.vineList.splice(test, 1);
-                            await axios.delete('/rm/' + test.id)
+                            await axios.delete('/rm/' + obj.id)
                         },
                         addvine: async function() {
                             let correct = true;
@@ -92,7 +92,6 @@ html
                                 this.name = '';
                                 this.description = '';
                                 this.Vquantity = '';
-                                this.vineList.sortDirection = 'ASC'
                             }
                         }
                 },
