@@ -203,19 +203,19 @@ app.put('/minus/:id', async function(req, res) {
         console.log('NEW QUANTITY =' + quan)
         let send = await Vine.update({ Quantity: quan }, {where:{ id: req.params.id, username: req.session.email }})
         console.log('vin bien réduit');
-        res.send(send)
+        res.sendStatus(200)
     }
 });
 
-app.post('/rm', async function(req, res) {
+app.delete('/rm/:id', async function(req, res) {
     console.log('RM');
-    console.log(req.body);
+
     if (!req.session.email)
         res.redirect('/');
     else {
-        await Vine.destroy({ where: { username: req.session.email, id: req.body.minus }} )
+        let send = await Vine.destroy({ where: { username: req.session.email, id: req.params.id }} )
         console.log('vin bien supprimé');
-        res.redirect('/vins');
+        res.sendStatus(200)
     }
 });
 
@@ -232,7 +232,7 @@ app.put('/plus/:id', async function(req, res) {
         let send = await Vine.update({ Quantity: quan }, {where:{ id: req.params.id, username: req.session.email }})
         console.log('vin bien ajouté');
         console.log('username =' + req.session.email);
-        res.send(send)
+        res.sendStatus(200)
     }
 });
 
