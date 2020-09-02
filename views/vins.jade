@@ -28,7 +28,7 @@ html
                             input(type="text" v-model="description" class="form" style="width:100%;margin-left:0px" placeholder="Description.." required)
                         td
                             input(type="number" v-model="Vquantity" class="form"  min="0" placeholder="0.." style="width:60%;margin-left:0px;display:inline-block;margin-right:20px" required)
-                            button(v-on:click="addvine()" class="myButton" style="display:inline-block;margin-left:0px;float:right") +
+                            button(v-on:click="addvine()" class="myButton" style="display:inline-block;float:right") +
                     tr(v-for="(vine, index) in filteredList", :key="index")
                         td {{ vine.Name }}
                         td {{ vine.Description }}
