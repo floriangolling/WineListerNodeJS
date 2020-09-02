@@ -12,4 +12,6 @@ module.exports  =  sequelize
                     console.error('Impossible de se connecter, ', err);
 });
 
-sequelize.sync({ force : false });
+User.sync({ force : false });
+Stage.sync({ force : false});
+Vine.sync({ force: false })

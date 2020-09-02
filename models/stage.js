@@ -7,7 +7,7 @@ module.exports = sequelize.define('stage', {
         allowNull: false
     },
     Description: {
-        type: Sequelize.STRING,
+        type: Sequelize.STRING(65535),
         allowNull: false
     },
     username: {

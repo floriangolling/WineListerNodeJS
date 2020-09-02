@@ -66,6 +66,18 @@ router.post('/add', async function(req, res) {
     }
 });
 
+router.post('/addstage', async function(req, res) {
+    console.log('ADD STAGE');
+    console.log(req.body);
+    if (!req.session.email)
+        res.redirect('/');
+    else {
+        await Stage.create({ username: req.session.email, Week: req.body.week, Description: req.body.description});
+        console.log('vin bien rajouté');
+        res.redirect('/stage');
+    }
+});
+
 router.post('/add2/:name/:description/:quantity', async function(req, res) {
     console.log('ADD');
     if (!req.session.email)

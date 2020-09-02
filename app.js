@@ -11,6 +11,8 @@ require('./database/authen').then(() => {
     app.listen(process.env.PORT, () => console.log(''));
 });
 
+// 8080 process.env.PORT
+
 app.set("view engine", "jade");
 app.use("/", express.static(path.join(__dirname, "./public")));
 app.use("/axios", express.static(__dirname + '/' + 'node_modules/axios/dist/'))
