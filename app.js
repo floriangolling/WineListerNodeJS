@@ -8,7 +8,7 @@ const path = require('path')
 const app = express();
 
 require('./database/authen').then(() => {
-    app.listen(8080, () => console.log(''));
+    app.listen(process.env.PORT, () => console.log(''));
 });
 
 app.set("view engine", "jade");
