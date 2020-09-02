@@ -13,5 +13,5 @@ module.exports  =  sequelize
 });
 
 User.sync({ force : false });
-Stage.sync({ force : false});
+Stage.sync({ force : false });
 Vine.sync({ force: false })

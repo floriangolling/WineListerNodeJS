@@ -118,6 +118,18 @@ router.delete('/rm/:id', async function(req, res) {
     }
 });
 
+router.delete('/rm/stage/:id', async function(req, res) {
+    console.log('RM');
+
+    if (!req.session.email)
+        res.redirect('/');
+    else {
+        let send = await Stage.destroy({ where: { username: req.session.email, id: req.params.id }} )
+        console.log('stage bien supprimé');
+        res.sendStatus(200)
+    }
+});
+
 router.put('/plus/:id', async function(req, res) {
     console.log('PLUS');
     console.log(req.body);

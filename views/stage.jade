@@ -4,6 +4,7 @@ html
         title Page d'accueil
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous")
         script( src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
+        script(src="/axios/axios.js")
         script(type="text/javascript").
             function change(test) {
                 var nice = '' + test;
@@ -24,16 +25,27 @@ html
                     tr
                         th Week n°
                         th Description
+                        th Supprimer
                 tbody
-                    tr(v-for="stage in filteredList")
+                    tr(v-for="(stage, index) in filteredList", :key="index")
                         td {{ stage.Week }}
-                        td {{ stage.Description }}
+                        td(style="padding:20px;line-height:200%;font-size:17px;color:white") {{ stage.Description }}
+                        td
+                            div(style="display:inline-block;margin-left:5px;float:right")
+                                button( class="myButton" style="font-size:10px;margin-left:-90%;height:70px;width:70px" v-on:click="dele(index, stage)") 🗑
+                                input(type="hidden", name="minus", :value="stage.id")
         script(type="text/javascript").
             const app = new Vue({
                 el:"#app3",
                 data: {
                     search: '',
                     stageList : !{JSON.stringify(Stages)}
+                },
+                methods: {
+                    dele: async function(test, obj) {
+                        this.stageList.splice(test, 1);
+                        await axios.delete('/rm/stage/' + obj.id)
+                    },
                 },
                 computed: {
                     filteredList() {
