@@ -32,7 +32,7 @@ html
                     tr(v-for="(vine, index) in filteredList", :key="index")
                         td {{ vine.Name }}
                         td {{ vine.Description }}
-                        td(:value="vine.Quantity",:id="vine.id") {{ vine.Quantity}}
+                        td(:value="vine.Quantity",:id="vine.id" style="font-size:25px") {{ vine.Quantity}}
                             div(style="display:inline-block;margin-left:5px;float:right")
                                 button( class="myButton",:value="vine.id" v-on:click="plus(vine)") +
                                 input(type="hidden", name="plus", :value="vine.id" ,)

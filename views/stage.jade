@@ -28,7 +28,7 @@ html
                         th Supprimer
                 tbody
                     tr(v-for="(stage, index) in filteredList", :key="index")
-                        td {{ stage.Week }}
+                        td(style="font-size:25px") {{ stage.Week }}
                         td(style="padding:20px;line-height:200%;font-size:17px;color:white") {{ stage.Description }}
                         td
                             div(style="display:inline-block;margin-left:5px;float:right")
