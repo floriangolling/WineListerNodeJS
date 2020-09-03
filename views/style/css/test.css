@@ -64,6 +64,7 @@ body {
     border-collapse: collapse;
     border: 3px solid #eae0c2;
     border-radius: 20px;
+    margin-top: 10px
   }
   
   thead th:nth-child(1) {
