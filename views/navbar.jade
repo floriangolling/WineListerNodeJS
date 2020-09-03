@@ -1,7 +1,7 @@
 mixin navLink(link, name)
     a(href=link) #{name}
 
-div(class="topnav")
+div(class="topnav" style="position:fixed")
     +navLink('/','Accueil')
     -if(messages.Co)
                 .message.Co
