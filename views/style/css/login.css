@@ -2,6 +2,7 @@
 
 body {
     background-image: linear-gradient(to bottom, rgba(51, 43, 35, 0.93), rgba(51, 43, 35, 0.93)), url('wood.jpg');
+    font: 100% Helvetica, sans-serif;
 }
 
 .main-section {

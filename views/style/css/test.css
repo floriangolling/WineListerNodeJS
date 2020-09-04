@@ -1,7 +1,8 @@
 body {
   font: 100% Helvetica, sans-serif;
   color: #FFFFFF;
-  background-image: linear-gradient(to bottom, rgba(51, 43, 35, 0.93), rgba(51, 43, 35, 0.93)), url('wood.jpg');
+  background-image: linear-gradient(to bottom, rgba(12, 7, 1, 0.97), rgba(45, 42, 37, 0.89)), url('wood.jpg');
+  background-size: 100% 100%;
 }
 
   .myButton {
