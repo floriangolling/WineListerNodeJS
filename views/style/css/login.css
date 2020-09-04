@@ -100,6 +100,7 @@ button {
     overflow: hidden;
     border-bottom:2px solid #ccc2a6;
     border-radius: 10px;
+    animation: animationnav 4s 1;
   }
   
   .topnav a {
@@ -170,4 +171,14 @@ button {
 @keyframes animationfour {
     from {left: 500px;opacity: 0;}
     to {left: 0px;opacity: 1;}
+}
+
+@keyframes animationnav {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes buttonanim {
+    from {width: 100%;}
+    to {width: 150%;}
 }

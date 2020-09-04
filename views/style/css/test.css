@@ -161,3 +161,12 @@ body {
   .allButFooter {
     min-height: calc(100vh - 40px);
 }
+
+.animation {
+  animation: myanim 3s 1;
+}
+
+@keyframes myanim {
+  from {margin-top: -500px;opacity: 0;}
+  to {marign-top: 10px;opacity: 1;}
+}
