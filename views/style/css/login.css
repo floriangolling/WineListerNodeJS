@@ -21,6 +21,8 @@ body {
 .user-img {
     margin-top: -50px;
     margin-bottom: 35px;
+    position: relative;
+    animation: animationtwo 4s 1;
 }
 
 .user-img img {
@@ -77,13 +79,7 @@ button {
 .btn:hover, .btn:focus {
     background-color: #857e6c!important;
     border-bottom: 4px solid #857e6c!important;
-}
-
-.mytitle {
-    font-size: 60px;
-    padding-bottom: 30px;
-    color: #ccc2a6;
-    text-shadow: 0 0 6px #1d1b18;
+    width:45%;
 }
 
 .fa-sign-in-alt::before {
@@ -129,3 +125,46 @@ button {
       font-size: 17px;
       opacity: 0.90;
   }
+
+  .myAnimation {
+      animation: myanimation 3s 1;
+  }
+
+  .mytitle {
+    font-size: 60px;
+    padding-bottom: 30px;
+    color: #ccc2a6;
+    text-shadow: 0 0 6px #1d1b18;
+    animation: animationthree 4s 1;
+    position: relative;
+}
+
+.mytitle2 {
+    font-size: 60px;
+    padding-bottom: 30px;
+    color: #ccc2a6;
+    text-shadow: 0 0 6px #1d1b18;
+    animation: animationfour 4s 1;
+    position: relative;
+}
+
+
+@keyframes myanimation {
+    from {top: -350px;}
+    to {top: 50px;}
+}
+
+@keyframes animationtwo {
+    from {top: -350px;}
+    to {top: 0px;}
+}
+
+@keyframes animationthree {
+    from {left: -500px;}
+    to {left: 0px;}
+}
+
+@keyframes animationfour {
+    from {left: 500px;}
+    to {left: 0px;}
+}
