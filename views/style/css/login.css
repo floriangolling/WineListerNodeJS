@@ -74,6 +74,8 @@ button {
     font-size: 19px;
     border-radius: 5px;
     border-bottom: 4px solid #857e6c;
+    transition: width 0.5s;
+    transition: background-color 0.4s;
 }
 
 .btn:hover, .btn:focus {
@@ -113,6 +115,7 @@ button {
   .topnav a:hover {
     background-image: linear-gradient(to bottom, rgba(29, 27, 24, 0.96), rgba(29, 27, 24, 0.96)), url('wood.jpg');
     color: white;
+    transition: background-image 2s;
   }
   
   .topnav a.active {
@@ -150,21 +153,21 @@ button {
 
 
 @keyframes myanimation {
-    from {top: -350px;}
-    to {top: 50px;}
+    from {top: -350px;opacity: 0;}
+    to {top: 50px;opacity: 1;}
 }
 
 @keyframes animationtwo {
-    from {top: -350px;}
-    to {top: 0px;}
+    from {top: -350px;opacity: 0;}
+    to {top: 0px;opacity: 1;}
 }
 
 @keyframes animationthree {
-    from {left: -500px;}
-    to {left: 0px;}
+    from {left: -500px;opacity: 0;}
+    to {left: 0px;opacity: 1;}
 }
 
 @keyframes animationfour {
-    from {left: 500px;}
-    to {left: 0px;}
+    from {left: 500px;opacity: 0;}
+    to {left: 0px;opacity: 1;}
 }
