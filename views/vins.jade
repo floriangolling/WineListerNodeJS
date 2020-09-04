@@ -86,12 +86,16 @@ html
                             if (isNaN(my_obj.Quantity))
                                 correct = false;
                             if (correct == true) {
-                                let newvine = await axios.post('/add2/' + my_obj.Name + '/' + my_obj.Description + '/' + my_obj.Quantity)
-                                my_obj.id = newvine.data.id;
-                                this.vineList.push(my_obj);
-                                this.name = '';
-                                this.description = '';
-                                this.Vquantity = '';
+                                try {
+                                    let newvine = await axios.post('/add2/' + my_obj.Name + '/' + my_obj.Description + '/' + my_obj.Quantity)
+                                    my_obj.id = newvine.data.id;
+                                    this.vineList.push(my_obj);
+                                    this.name = '';
+                                    this.description = '';
+                                    this.Vquantity = ''; }
+                                catch(err) {
+                                    res.send(404);
+                                }
                             }
                         }
                 },
