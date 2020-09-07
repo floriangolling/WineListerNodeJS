@@ -8,7 +8,7 @@ const path = require('path')
 const app = express();
 
 require('./database/authen').then(() => {
-    app.listen(process.env.PORT, () => console.log(''));
+    app.listen(process.env.PORT || 8080, () => console.log(''));
 });
 
 // 8080 process.env.PORT

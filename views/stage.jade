@@ -5,12 +5,6 @@ html
         link(rel="stylesheet", href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous")
         script( src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js")
         script(src="/axios/axios.js")
-        script(type="text/javascript").
-            function change(test) {
-                var nice = '' + test;
-                document.getElementById(nice).value = document.getElementById(nice).value + 1;
-                console.log(document.getElementById(test))
-            }
         style
             include ../node_modules/@fortawesome/fontawesome-free/css/all.css
             include style/css/test.css
@@ -43,8 +37,12 @@ html
                 },
                 methods: {
                     dele: async function(test, obj) {
-                        this.stageList.splice(test, 1);
-                        await axios.delete('/rm/stage/' + obj.id)
+                        try {
+                            await axios.delete('/rm/stage/' + obj.id)
+                            this.stageList.splice(test, 1);
+                        } catch(e) {
+                            console.error(e);
+                        }
                     },
                 },
                 computed: {

@@ -56,18 +56,30 @@ html
                 },
                 methods:{
                         minus: async function(test) {
-                            test.Quantity = Number(test.Quantity) - 1;
-                            if (test.Quantity < 0)
-                                test.Quantity = 0;
-                            await axios.put('/minus/' + test.id)
+                            try {
+                                await axios.put('/minus/' + test.id)
+                                test.Quantity = Number(test.Quantity) - 1;
+                                    if (test.Quantity < 0)
+                                        test.Quantity = 0;
+                            } catch(e) {
+                                console.log(e);
+                            }
                         },
                         plus: async function(test) {
-                            test.Quantity = Number(test.Quantity) + 1;
-                            await axios.put('/plus/' + test.id)
+                            try {
+                                await axios.put('/plus/' + test.id)
+                                test.Quantity = Number(test.Quantity) + 1;
+                            } catch(e) {
+                                console.log(e);
+                            }
                         },
                         dele: async function(test, obj) {
-                            this.vineList.splice(test, 1);
-                            await axios.delete('/rm/' + obj.id)
+                            try {
+                                await axios.delete('/rm/' + obj.id)
+                                this.vineList.splice(test, 1);
+                            } catch (e) {
+                                console.error(e);
+                            }
                         },
                         addvine: async function() {
                             let correct = true;
@@ -94,7 +106,7 @@ html
                                     this.description = '';
                                     this.Vquantity = ''; }
                                 catch(err) {
-                                    res.send(404);
+                                    console.error(err)
                                 }
                             }
                         }

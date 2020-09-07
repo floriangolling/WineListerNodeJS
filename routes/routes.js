@@ -25,9 +25,13 @@ router.get('/vins', async function(req, res) {
         req.flash('info','Veuillez vous connecter');
         res.redirect('/login');
     } else {
-        const vine = await Vine.findAll({ where: { username: req.session.email }, order: [
+        try {
+            const vine = await Vine.findAll({ where: { username: req.session.email }, order: [
             ['id', 'ASC'],
-        ]});
+            ]});
+        } catch(e) {
+            res.send(e);
+        }
         if (vine == null)
             res.redirect('/add');
         else {
